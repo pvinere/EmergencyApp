@@ -1,7 +1,0 @@
-{
-  "name": "EmergencyApp",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular-standalone"
-}
