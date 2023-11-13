@@ -1,17 +1,19 @@
 
-
-<div class="labels">
+<ion-content class="ion-padding ion-flex ion-justify-content-center ion-align-items-center">
     <img src="assets/logos/logo-no-background.png" alt="Logo" class="logo">
+    <div class="labels">
     <ion-input class="lemail" label="E-Mail" label-placement="floating" fill="outline" placeholder="Enter E-Mail"></ion-input>
     <ion-input class="lpass" label="Password" label-placement="floating" fill="outline" placeholder="Enter Password" type="password"></ion-input>
+
     <ion-button [routerLink]="['/login']" class="button-size" shape="round">
         <ion-icon name="log-in-outline"></ion-icon>
-        
     </ion-button>
+
+    <div class="ion-text-center">...or use Google instead</div>
     <ion-button class="button-size" shape="round">
         <ion-icon name="logo-google"></ion-icon>
-        
+
     </ion-button>
 </div>
-
+</ion-content>
 
