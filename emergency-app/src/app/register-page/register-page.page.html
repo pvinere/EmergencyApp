@@ -1,0 +1,22 @@
+
+<ion-content class="ion-padding ion-flex ion-justify-content-center ion-align-items-center">
+  <img src="assets/logos/logo-no-background.png" alt="Logo" class="logo">
+  <div class="ion-text-center">Register</div>
+
+  <div class="labels">
+  <ion-input class="lemail" label="E-Mail" label-placement="floating" fill="outline" placeholder="Enter E-Mail" autocomplete="disabled" ></ion-input>
+  <ion-input class="lpass" label="Type a new password" label-placement="floating" fill="outline" placeholder="Type a new password" type="password" autocomplete="disabled"></ion-input>
+  <ion-input class="lpass" label="Re-enter the new Password" label-placement="floating" fill="outline" placeholder="Re-enter the new Password" type="password" autocomplete="disabled" ></ion-input>
+
+  <ion-button [routerLink]="['/login']" class="button-size" shape="round">
+      <ion-icon name="enter-outline"></ion-icon>
+  </ion-button>
+  <div class="ion-text-center">
+    <ion-button [routerLink]="['/first-page']" class="back-button" shape="round">
+        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+    </ion-button>
+</div>
+
+  
+</div>
+</ion-content>

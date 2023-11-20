@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "emergency-app-c3671": {
+      "hosting": {
+        "app": [
+          "emergency-app-c3671"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "emergency-app-c3671"
+  }
+}
