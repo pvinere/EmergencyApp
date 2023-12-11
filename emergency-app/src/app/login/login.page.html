@@ -3,10 +3,10 @@
     <img src="assets/logos/logo-no-background.png" alt="Logo" class="logo">
     
     <div class="labels">
-    <ion-input class="lemail" label="E-Mail" label-placement="floating" fill="outline" placeholder="Enter E-Mail"></ion-input>
-    <ion-input class="lpass" label="Password" label-placement="floating" fill="outline" placeholder="Enter Password" type="password"></ion-input>
+    <ion-input class="lemail" label="E-Mail" label-placement="floating" fill="outline" placeholder="Enter E-Mail" type="text" #email required></ion-input>
+    <ion-input class="lpass" label="Password" label-placement="floating" fill="outline" placeholder="Enter Password" type="password" #password required></ion-input>
 
-    <ion-button [routerLink]="['/tabs/home']" class="button-size" shape="round">
+    <ion-button class="button-size" shape="round" (click)="logIn(email, password)">
         <ion-icon name="log-in-outline"></ion-icon>
     </ion-button>
 
