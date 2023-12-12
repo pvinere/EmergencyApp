@@ -3,21 +3,35 @@
   <img src="assets/logos/logo-no-background.png" alt="Logo" class="logo">
   <div class="ion-text-center">Register</div>
 
+  <form [formGroup]="form">
   <div class="labels">
   <ion-input class="ltext" label="Name" label-placement="floating" fill="outline" placeholder="Enter your name" autocomplete="disabled" type="text"  ></ion-input>
-  <ion-input class="ltext" label="E-Mail" label-placement="floating" fill="outline" placeholder="Enter E-Mail" autocomplete="disabled" type="text" #email required ></ion-input>
-  <ion-input class="lpass" label="Type a new password" label-placement="floating" fill="outline" placeholder="Type a new password" type="password" #password required autocomplete="disabled"></ion-input>
-  <ion-input class="lpass" label="Re-enter the new Password" label-placement="floating" fill="outline" placeholder="Re-enter the new Password" type="password" autocomplete="disabled" ></ion-input>
+  <ion-input class="ltext" formControlName="email" label="E-Mail" label-placement="floating" fill="outline" placeholder="Enter E-Mail" autocomplete="disabled" type="text" #email required ></ion-input>
+ 
+  <ion-input class="lpass" formControlName="password" label="Type a new password" label-placement="floating" fill="outline" placeholder="Type a new password" type="password" #password required autocomplete="disabled"></ion-input>
+  <ion-input class="lpass" formControlName="confirmPassword" label="Re-enter the new Password" label-placement="floating" fill="outline" placeholder="Re-enter the new Password" type="password" autocomplete="disabled" ></ion-input>
 
-  <ion-button  class="button-size" (click)="signUp(email, password)" shape="round">
+  <div *ngIf="form?.errors?.['mismatch'] && form?.touched" class="error-text">
+    Password must match!
+  </div>
+
+  </div>
+</form>
+
+  <ion-button [disabled]="!form.valid" class="button-size" (click)="signUp(email, password)" shape="round">
       <ion-icon name="enter-outline"></ion-icon>
   </ion-button>
   <div class="ion-text-center">
     <ion-button [routerLink]="['/first-page']" class="back-button" shape="round">
         <ion-icon name="arrow-back-circle-outline"></ion-icon>
     </ion-button>
+
+    
+
 </div>
 
+
+
   
-</div>
+
 </ion-content>
