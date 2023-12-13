@@ -20,9 +20,9 @@ formReg: FormGroup;
     
   ) {
     this.formReg = new FormGroup({
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required] ),
       confirmPassword: new FormControl('', [Validators.required]),
     },
     {
@@ -48,6 +48,12 @@ formReg: FormGroup;
 
   passwordMatchValidator(control: AbstractControl) {
     return control.get('password')?.value === control.get('confirmPassword')?.value ? null : { mismatch: true };
+  }
+
+  get passwordFormField() {
+  
+    return this.formReg.get('password');
+  
   }
 
 }
