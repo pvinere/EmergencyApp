@@ -10,7 +10,7 @@
 
     <ion-input class="ltext" formControlName="name" label="Name"  label-placement="floating" fill="outline" placeholder="Enter your name" autocomplete="disabled" type="text" #name required ></ion-input>
       <div *ngIf="formReg.controls['name'].hasError('minlength') && formReg?.touched" class="error-text">
-        Name must be atleas 4 characters long!
+        Name must be atleast 4 characters long!
      </div>
   
     <ion-input class="ltext" formControlName="email" label="E-Mail" label-placement="floating" fill="outline" placeholder="Enter E-Mail" autocomplete="disabled" type="text" #email required ></ion-input>
