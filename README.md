@@ -1,6 +1,6 @@
 # EmergencyApp: Personal emergency App
 
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 ### Build With
 
@@ -17,7 +17,7 @@ This is an example of setting up the project locally. To get a local copy up and
 
 2. Clone the repository :
 ```sh
-git clone https://github.com/ComsaAndreea/Greenevive.git
+git clone https://github.com/pvinere/EmergencyApp.git
 ```
 3. Install the Ionic CLI with npm : 
 ```sh
@@ -25,7 +25,7 @@ npm install -g @ionic/cli
 ```
 4. Run the App :
 ```sh
-cd .\greenevive\
+cd .\emergency-app\
 ionic serve
 ```   
 
