@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../shared/authentication-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +12,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LoginPage implements OnInit {
   formRegLogin: FormGroup;
   accountErrorMessage: string | undefined;
-
-
+  
+  
   constructor(
     public authService: AuthenticationService,
+    private alertController: AlertController,
     public router: Router
   ) {
     this.formRegLogin = new FormGroup({
@@ -27,8 +29,10 @@ export class LoginPage implements OnInit {
     );
     
   }
+
   ngOnInit() {}
-  logIn(email: any, password: any) {
+
+  async logIn(email: any, password: any) {
     this.authService
       .SignIn(email.value, password.value)
       .then((): any => {
@@ -41,18 +45,32 @@ export class LoginPage implements OnInit {
           this.router.navigate(['/tabs/home']);
       })
       .catch((error) => {
+        let errorMessage = '';
         switch (error.code) {
-          case "auth/invalid-login-credentials":
-          {
-             this.accountErrorMessage = "Wrong email address or password.";
-             break;
-          }
-             default:
-          {
-              this.accountErrorMessage = "Unexpected Error";
-              break;
-          }
-     }
+          case 'auth/invalid-login-credentials':
+            errorMessage = 'Wrong Email or password!';
+            break;
+          default:
+            errorMessage = 'Unexpected Error!';
+            break;
+        }
+        this.presentAlert(errorMessage);
       });
+
   }
+
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Eroare',
+      message: message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  
+
+  
+  
 }
+}
+
