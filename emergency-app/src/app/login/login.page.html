@@ -5,6 +5,9 @@
     
     <form [formGroup]="formRegLogin">
     <div class="labels">
+    <div *ngIf="accountErrorMessage">{{ accountErrorMessage }}
+    
+    </div>
     <ion-input formControlName="email" class="lemail" label="E-Mail" label-placement="floating" fill="outline" placeholder="Enter E-Mail" type="text" #email required ></ion-input>
     
     <ion-input formControlName="password" class="lpass" label="Password" label-placement="floating" fill="outline" placeholder="Enter Password" type="password" #password required></ion-input>

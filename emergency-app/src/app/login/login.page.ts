@@ -10,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginPage implements OnInit {
   formRegLogin: FormGroup;
+  accountErrorMessage: string | undefined;
 
 
   constructor(
@@ -40,7 +41,18 @@ export class LoginPage implements OnInit {
           this.router.navigate(['/tabs/home']);
       })
       .catch((error) => {
-        window.alert(error.message);
+        switch (error.code) {
+          case "auth/invalid-login-credentials":
+          {
+             this.accountErrorMessage = "Wrong email address or password.";
+             break;
+          }
+             default:
+          {
+              this.accountErrorMessage = "Unexpected Error";
+              break;
+          }
+     }
       });
   }
 }
