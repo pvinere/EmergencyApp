@@ -1,22 +1,25 @@
 
 <ion-content class="ion-padding ion-flex ion-justify-content-center ion-align-items-center">
-    <img src="assets/logos/logo-no-background.png" alt="Logo" class="logo">
-
+    <div class="logosp"> 
+        <ion-card>
+            <img src="assets/logos/logo-no-background.png" alt="Logo" class="logo">
+        </ion-card>
+    <div class="back-css" style="background-image: url('assets/images/back4.jpg')"></div>
+    </div>
     
-
     <form [formGroup]="formRegLogin">
     <div class="labels">
     
-    <ion-input formControlName="email" class="lemail" label="E-Mail" label-placement="floating" fill="outline" placeholder="Enter E-Mail" type="text" #email required ></ion-input>
+    <ion-input formControlName="email" class="lemail" label="E-Mail" label-placement="floating" fill="solid" placeholder="Enter E-Mail" type="text" #email required ></ion-input>
     
-    <ion-input formControlName="password" class="lpass" label="Password" label-placement="floating" fill="outline" placeholder="Enter Password" type="password" #password required></ion-input>
+    <ion-input formControlName="password" class="lpass" label="Password" label-placement="floating" fill="solid" placeholder="Enter Password" type="password" #password required></ion-input>
     
     
     <ion-button [disabled]="!formRegLogin.valid" class="button-size" shape="round" (click)="logIn(email, password)">
         <ion-icon name="log-in-outline"></ion-icon>
     </ion-button>
 
-    <div class="ion-text-center">...or use Google instead</div>
+    <div class="ion-text-center"><div class="color_text">...or use Google instead</div></div>
     <ion-button class="button-size" shape="round">
         <ion-icon name="logo-google"></ion-icon>
     </ion-button>

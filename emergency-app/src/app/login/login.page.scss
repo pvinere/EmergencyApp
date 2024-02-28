@@ -29,10 +29,14 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 4rem;
+    margin-top:0.5rem;
+    margin-bottom: 1rem;
     width: 90%;
-    padding-top: 1rem;
-    padding-bottom: 2rem;
+  }
+
+  .logosp{
+    margin-top: 5rem;
+    margin-bottom: 3rem;
   }
 
 .back-button{
@@ -40,3 +44,24 @@
     margin-right: auto;
     
 }
+
+.color_text{
+    color:#eb445a;
+}
+
+.back-css {
+    /* Stilurile pentru imaginea de fundal */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    background-position: center;
+    background-size: cover;    
+    animation-name: fadeInOut;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite; /* Transparenta de 50% */
+    }
