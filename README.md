@@ -4,9 +4,13 @@ Mobile application for managing emergency situations.
 
 ### Features
 Map Tab - Map based on user location, where you can ping emergency situations.
-News Tab - News from user location(only emergency ones)
+
+News Tab - News from user location(only emergency ones).
+
 Home Tab - Emergency numbers based on user location and a search feature for different countries.
+
 Info Tab - Integrated ChatGPT for the users to ask in case of emergency and a library for different situations.
+
 Settings Tab - Name change, password change.
 
 ### Build With
