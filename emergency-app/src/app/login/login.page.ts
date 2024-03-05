@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../shared/authentication-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, isPlatform } from '@ionic/angular';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 
 @Component({
   selector: 'app-login',
@@ -12,13 +15,24 @@ import { AlertController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   formRegLogin: FormGroup;
   accountErrorMessage: string | undefined;
+  userInfo = null;
+ 
   
   
   constructor(
     public authService: AuthenticationService,
     private alertController: AlertController,
+    private afs: AngularFirestore,
     public router: Router
+    
+
   ) {
+
+    if(!isPlatform('capacitor')) {
+      GoogleAuth.initialize();
+    }
+
+
     this.formRegLogin = new FormGroup({
       
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -27,7 +41,6 @@ export class LoginPage implements OnInit {
     },
   
     );
-    
   }
 
   ngOnInit() {}
@@ -68,9 +81,45 @@ export class LoginPage implements OnInit {
 
     await alert.present();
   
-
+    
   
   
 }
+
+
+async signInGoogle() {
+  try {
+    const googleUser = await GoogleAuth.signIn() as any;
+    console.log('user:', googleUser);
+    this.userInfo = googleUser;
+
+    // Define default values or handle undefined fields
+    const name = googleUser.givenName;
+    const email = googleUser.email;
+    const uid = googleUser.id;
+
+    console.log(name);
+
+    // Add user info to Firestore
+    await this.afs.collection('users').doc(googleUser.uid).set({
+      name: name,
+      email: email,
+      uid: uid
+    });
+
+    this.router.navigate(['/tabs/home']);
+  } catch (error) {
+    console.error('Error signing in with Google:', error);
+    // Handle error
+  }
+}
+
+
+
+  async refresh()
+  {
+    const authCode = await GoogleAuth.refresh();
+    console.log('refresh: ', authCode);
+  }
 }
 

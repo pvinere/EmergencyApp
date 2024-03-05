@@ -19,7 +19,9 @@ export class Tab2Page implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     this.afAuth.authState.subscribe(user => {
+      
       if (user) {
         this.userName$ = this.afs.doc<any>(`users/${user.uid}`).valueChanges().pipe(
           map(user => user.name)
