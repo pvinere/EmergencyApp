@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
       .catch((error) => {
         let errorMessage = '';
         switch (error.code) {
-          case 'auth/invalid-login-credentials':
+          case 'auth/invalid-credential':
             errorMessage = 'Wrong Email or password!';
             break;
           default:

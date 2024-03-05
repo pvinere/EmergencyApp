@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../shared/authentication-service';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @Component({
@@ -16,7 +17,8 @@ formReg: FormGroup;
 
   constructor(
     public authService: AuthenticationService,
-    public router: Router
+    public router: Router,
+    private afs: AngularFirestore
     
   ) {
     this.formReg = new FormGroup({
@@ -35,18 +37,28 @@ formReg: FormGroup;
   ngOnInit() {
   
   }
-  signUp(email: any, password: any) {
+  signUp(email: any, password: any, name: any) {
     this.authService
       .RegisterUser(email.value, password.value)
       .then((res) => {
-        this.router.navigate(['/tabs/home']);
+        if (res && res.user) {
+          const uid = res.user.uid;
+          this.afs.collection('users').doc(uid).set({
+            name: name.value,
+            email: email.value,
+            uid: uid
+          });
+          this.router.navigate(['/tabs/home']);
+        } else {
+          // Handle the case where res.user is null
+          console.error("User data not available");
+        }
       })
       .catch((error) => {
         window.alert(error.message);
       });
-      
   }
-
+  
   passwordMatchValidator(control: AbstractControl) {
     return control.get('password')?.value === control.get('confirmPassword')?.value ? null : { mismatch: true };
   }
@@ -57,4 +69,5 @@ formReg: FormGroup;
   
   }
 
+ 
 }
