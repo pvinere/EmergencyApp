@@ -46,8 +46,7 @@ formReg: FormGroup;
           this.afs.collection('users').doc(uid).set({
             name: name.value,
             email: email.value,
-            uid: uid,
-            googlelg: "no"
+            uid: uid
           });
           this.sharedService.uid = uid;
           this.router.navigate(['/tabs/home']);

@@ -7,5 +7,9 @@ import { Injectable } from '@angular/core';
 export class SharedService {
   uid: string | undefined;
 
+  setUID(uid: string) {
+    this.uid = uid;
+  }
+
   constructor() { }
 }

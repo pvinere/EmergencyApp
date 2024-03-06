@@ -28,7 +28,7 @@ export class Tab2Page implements OnInit {
         console.log("UID from tab2Home: " + this.sharedService.uid);
         this.userName$ = this.afs.doc<any>(`users/${this.sharedService.uid}`).valueChanges().pipe(
           map(userData => {
-            // Check if userData is undefined
+            
             if (userData) {
               return userData.name;
             } else {

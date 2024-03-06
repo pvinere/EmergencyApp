@@ -52,36 +52,37 @@ export class LoginPage implements OnInit {
 
   }
   async logIn(email: any, password: any) {
-    this.authService
-      .SignIn(email.value, password.value)
-      .then((): any => {
-        // if (this.authService.isEmailVerified) {
-        //   this.router.navigate(['/tabs/home']);
-        // } else {
-        //   window.alert('Email is not verified');
-        //   return false;
-        // }
+    try {
+      await this.authService.SignIn(email.value, password.value);
+  
+      this.afAuth.authState.subscribe(user => {
+        if (user) {
+          const uid = user.uid;
+  
+          this.sharedService.setUID(uid);
+
+          console.log("User UID:", this.sharedService.uid);
           this.router.navigate(['/tabs/home']);
-      })
-      .catch((error) => {
-        let errorMessage = '';
-        switch (error.code) {
-          case 'auth/invalid-login-credentials':
-            errorMessage = 'Wrong Email or password!';
-            break;
-
-          case 'auth/invalid-credential':
-            errorMessage = 'Wrong Email or password!';
-            break;
-          default:
-            errorMessage = 'Unexpected Error!';
-            break;
         }
-        this.presentAlert(errorMessage);
       });
-
+    } catch (error:any) {
+      let errorMessage = '';
+      switch (error.code) {
+        case 'auth/invalid-login-credentials':
+          errorMessage = 'Wrong Email or password!';
+          break;
+        case 'auth/invalid-credential':
+          errorMessage = 'Wrong Email or password!';
+          break;
+        default:
+          errorMessage = 'Unexpected Error!';
+          break;
+      }
+      this.presentAlert(errorMessage);
+    }
   }
-
+  
+  
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
       header: 'Eroare',
@@ -102,35 +103,27 @@ async signInGoogle() {
     console.log('user:', googleUser);
     this.userInfo = googleUser;
 
-    // Define default values or handle undefined fields
     const name = googleUser.givenName;
-    console.log(name);
+    console.log("Name Google:");
     const email = googleUser.email;
     const uid = googleUser.id;
-    const googlelg = "yes";
     this.sharedService.uid = uid;
 
     console.log("UID from login" + this.sharedService.uid);
     
-
-    // Add user info to Firestore
     await this.afs.collection('users').doc(uid).set({
       name: name,
       email: email,
-      uid: uid,
-      googlelg : googlelg
+      uid: uid
     });
 
     this.router.navigate(['/tabs/home']);
   } catch (error) {
     console.error('Error signing in with Google:', error);
-    // Handle error
   }
 
   
 }
-
-
 
   async refresh()
   {
