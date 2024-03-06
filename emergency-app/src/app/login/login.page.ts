@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../shared/authentication-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, isPlatform } from '@ionic/angular';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable, map } from 'rxjs';
+import { SharedService } from '../shared/service';
 
 @Component({
   selector: 'app-login',
@@ -17,14 +19,16 @@ export class LoginPage implements OnInit {
   accountErrorMessage: string | undefined;
   userInfo = null;
  
+  userName$: Observable<string> | undefined;
   
   
   constructor(
     public authService: AuthenticationService,
     private alertController: AlertController,
     private afs: AngularFirestore,
-    public router: Router
-    
+    public router: Router,
+    private afAuth: AngularFireAuth,
+    @Inject(SharedService)private sharedService: SharedService
 
   ) {
 
@@ -43,8 +47,10 @@ export class LoginPage implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+   
 
+  }
   async logIn(email: any, password: any) {
     this.authService
       .SignIn(email.value, password.value)
@@ -60,6 +66,10 @@ export class LoginPage implements OnInit {
       .catch((error) => {
         let errorMessage = '';
         switch (error.code) {
+          case 'auth/invalid-login-credentials':
+            errorMessage = 'Wrong Email or password!';
+            break;
+
           case 'auth/invalid-credential':
             errorMessage = 'Wrong Email or password!';
             break;
@@ -86,7 +96,6 @@ export class LoginPage implements OnInit {
   
 }
 
-
 async signInGoogle() {
   try {
     const googleUser = await GoogleAuth.signIn() as any;
@@ -95,16 +104,21 @@ async signInGoogle() {
 
     // Define default values or handle undefined fields
     const name = googleUser.givenName;
+    console.log(name);
     const email = googleUser.email;
     const uid = googleUser.id;
+    const googlelg = "yes";
+    this.sharedService.uid = uid;
 
-    console.log(name);
+    console.log("UID from login" + this.sharedService.uid);
+    
 
     // Add user info to Firestore
-    await this.afs.collection('users').doc(googleUser.uid).set({
+    await this.afs.collection('users').doc(uid).set({
       name: name,
       email: email,
-      uid: uid
+      uid: uid,
+      googlelg : googlelg
     });
 
     this.router.navigate(['/tabs/home']);
@@ -112,6 +126,8 @@ async signInGoogle() {
     console.error('Error signing in with Google:', error);
     // Handle error
   }
+
+  
 }
 
 

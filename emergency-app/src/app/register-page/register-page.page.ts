@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../shared/authentication-service';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { SharedService } from '../shared/service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
@@ -18,8 +18,8 @@ formReg: FormGroup;
   constructor(
     public authService: AuthenticationService,
     public router: Router,
-    private afs: AngularFirestore
-    
+    private afs: AngularFirestore,
+    @Inject(SharedService)private sharedService: SharedService
   ) {
     this.formReg = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -46,13 +46,16 @@ formReg: FormGroup;
           this.afs.collection('users').doc(uid).set({
             name: name.value,
             email: email.value,
-            uid: uid
+            uid: uid,
+            googlelg: "no"
           });
+          this.sharedService.uid = uid;
           this.router.navigate(['/tabs/home']);
         } else {
           // Handle the case where res.user is null
           console.error("User data not available");
         }
+        
       })
       .catch((error) => {
         window.alert(error.message);
