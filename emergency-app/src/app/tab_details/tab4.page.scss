@@ -1,3 +1,51 @@
-#button {
+.title-card{
+    margin-top: 5em;
+    color:#ff4136;
+    font-weight: bold
+}
+
+
+.title{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:0.2em;
+    font-size:3em;
+    text-align: center;
     
 }
+
+
+.cards {
+    margin-top: 1.5em;
+    padding-bottom: 9em;
+}
+
+.card {
+    padding-top: 0.5em;
+    
+
+}
+
+.img-size {
+    padding-top: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.back-css {
+    /* Stilurile pentru imaginea de fundal */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    background-position: center;
+    background-size: cover;    
+    animation-name: fadeInOut;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite; /* Transparenta de 50% */
+    }

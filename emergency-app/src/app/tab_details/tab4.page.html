@@ -1,10 +1,53 @@
     <ion-content [fullscreen]="true">
+      
     <ion-header collapse="condense">
       <ion-toolbar>
         <ion-title size="large">Tab 1</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-button [routerLink]="['/first-page']">Log-out</ion-button>
-    <app-explore-container name="Details page"></app-explore-container>
+    
+    <div class="back-css" style="background-image: url('assets/images/back3.jpg')">
+    <ion-item class='title-card'>
+      <div class="title">
+        
+        Settings
+      </div>
+    </ion-item>
+
+    <div class="cards">
+    <ion-item class="card">
+      <ion-toggle justify="space-between">Dark Mode</ion-toggle>
+    </ion-item>
+
+    <ion-item class="card">
+      <ion-label>Change Name</ion-label> <ion-button><ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item class="card">
+      <ion-label>Change Password</ion-label> <ion-button><ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item class="card">
+      <ion-label>Log out</ion-label>      <ion-button [routerLink]="['/first-page']"><ion-icon name="log-out-outline"></ion-icon></ion-button>
+    </ion-item>
+
+  </div>
+    <div class="info">
+
+      <ion-card>
+        <img class="img-size"alt="Img" src="assets/logos/logo-no-background.png" />
+        <ion-card-content class="img-size">
+          2024 Created by Vinereanu Puiu-Andrei 
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+    
+  
+  </div>
+    
+    
   </ion-content>
   
