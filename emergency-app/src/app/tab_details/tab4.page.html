@@ -16,7 +16,7 @@
 
     <div class="cards">
     <ion-item class="card">
-      <ion-toggle justify="space-between">Dark Mode</ion-toggle>
+      <ion-toggle  justify="space-between" mode="md" [checked]="darkMode" (ionChange)="toggleDarkMode()">Dark Mode</ion-toggle>
     </ion-item>
 
     <ion-item class="card">
