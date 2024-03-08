@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { getAuth, signOut } from "firebase/auth";
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab4.page.html',
@@ -7,12 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Tab4Page implements OnInit{
 
-  constructor() {}
+
+
+
+  constructor(public router: Router,) {
+    
+  }
   ngOnInit(): void {
     this.checkAppMode();
   }
 
+  
   darkMode = false;
+  
+  
+   signOut(){
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      this.router.navigate(['/first-page']);
+    })
+
+   }
 
   async checkAppMode() {
   

@@ -11,13 +11,17 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { SharedService } from './shared/service';
 
+
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(),
+  imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    BrowserModule, IonicModule.forRoot(),
     AppRoutingModule, 
     AngularFireModule,
     AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)], 
+   ], 
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy},SharedService,],
   bootstrap: [AppComponent],
 })

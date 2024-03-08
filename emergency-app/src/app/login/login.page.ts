@@ -8,7 +8,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable, map } from 'rxjs';
 import { SharedService } from '../shared/service';
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -45,42 +46,54 @@ export class LoginPage implements OnInit {
     },
   
     );
+
+    
   }
 
   ngOnInit(): void {
    
 
   }
-  async logIn(email: any, password: any) {
-    try {
-      await this.authService.SignIn(email.value, password.value);
-  
-      this.afAuth.authState.subscribe(user => {
-        if (user) {
-          const uid = user.uid;
-  
-          this.sharedService.setUID(uid);
 
+  async logIn(email: any, password: any) {
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, email.value, password.value).then((userCredential) => {
+          const user = userCredential.user;
+          this.sharedService.setUID(user.uid);
           console.log("User UID:", this.sharedService.uid);
           this.router.navigate(['/tabs/home']);
+      }).catch((error)=>{
+        let errorMessage = '';
+        switch (error.code) {
+          case 'auth/invalid-login-credentials':
+            errorMessage = 'Wrong Email or password!';
+            break;
+          case 'auth/invalid-credential':
+            errorMessage = 'Wrong Email or password!';
+            break;
+          default:
+            errorMessage = 'Unexpected Error!';
+            break;
         }
+        this.presentAlert(errorMessage);
       });
-    } catch (error:any) {
-      let errorMessage = '';
-      switch (error.code) {
-        case 'auth/invalid-login-credentials':
-          errorMessage = 'Wrong Email or password!';
-          break;
-        case 'auth/invalid-credential':
-          errorMessage = 'Wrong Email or password!';
-          break;
-        default:
-          errorMessage = 'Unexpected Error!';
-          break;
-      }
-      this.presentAlert(errorMessage);
     }
-  }
+  
+
+      // this.afAuth.authState.subscribe(user => {
+      //   if (user) {
+      //     const uid = user.uid;
+  
+      //     this.sharedService.setUID(uid);
+
+      //     console.log("User UID:", this.sharedService.uid);
+      //     this.router.navigate(['/tabs/home']);
+      //   }
+      // });
+     
+  
+
+
   
   
   async presentAlert(message: string) {
@@ -92,12 +105,61 @@ export class LoginPage implements OnInit {
 
     await alert.present();
   
-    
-  
-  
 }
 
-async signInGoogle() {
+signInGoogle(){
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+  signInWithPopup(auth, provider)
+  .then((result) => {
+    
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    if (credential !== null) {
+      const token = credential.accessToken;
+      
+      const user = result.user;
+      console.log('user:', user);
+
+    const name = user.displayName;
+    console.log("Name Google: " + name);
+    const email = user.email;
+    
+
+    const uid = user.uid;
+    console.log("UID from login: " + uid);
+    
+
+    this.afs.collection('users').doc(uid).set({
+      name: name,
+      email: email,
+      uid: uid
+    });
+
+    this.sharedService.uid = uid;
+    
+    this.router.navigate(['/tabs/home']);
+    } else {
+      
+      console.error("Credential is null");
+    }
+    
+    const user = result.user;
+    
+  }).catch((error) => {
+    
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    
+    const email = error.customData.email;
+    
+    const credential = GoogleAuthProvider.credentialFromError(error);
+
+  });
+
+}
+
+
+async signInGoogle2() {
   try {
     const googleUser = await GoogleAuth.signIn() as any;
     console.log('user:', googleUser);

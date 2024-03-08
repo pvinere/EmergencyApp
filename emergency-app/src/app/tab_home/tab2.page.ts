@@ -4,6 +4,7 @@ import { AuthenticationService } from '../shared/authentication-service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { SharedService } from '../shared/service';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -12,15 +13,17 @@ import { SharedService } from '../shared/service';
 export class Tab2Page implements OnInit {
 
   userName$: Observable<string> | undefined;
+  
 
   constructor(
     public authService: AuthenticationService,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     @Inject(SharedService)private sharedService: SharedService
-  ) { }
+  ) 
+  { }
 
-  
+    
 
   ngOnInit(): void {
     this.afAuth.authState.subscribe(user => {

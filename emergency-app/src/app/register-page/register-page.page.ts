@@ -37,6 +37,29 @@ formReg: FormGroup;
   ngOnInit() {
   
   }
+
+  // signUp2(email: any, password: any, name: any)
+  // {
+  //   const auth = getAuth();
+  //   createUserWithEmailAndPassword(auth, email, password)
+  //   .then((userCredential) => { 
+  //     const user = userCredential.user;
+  //     const uid = user.uid;
+  //     this.afs.collection('users').doc(uid).set({
+  //       name: name.value,
+  //       email: email.value,
+  //       uid: uid
+  //     });
+  //     this.sharedService.uid = uid;
+  //     this.router.navigate(['/tabs/home']); 
+  //   }).catch((error) => {
+  //     window.alert(error.message);
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //   });
+  // }
+
+
   signUp(email: any, password: any, name: any) {
     this.authService
       .RegisterUser(email.value, password.value)
