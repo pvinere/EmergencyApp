@@ -12,6 +12,6 @@ export class FirstPagePage implements OnInit {
 
   ngOnInit() {
   }
-
+  
 
 }
