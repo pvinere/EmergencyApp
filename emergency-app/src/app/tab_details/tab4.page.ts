@@ -42,10 +42,10 @@ export class Tab4Page implements OnInit{
   async checkAppMode() {
   
     const checkIsDarkMode = localStorage.getItem('darkModeActivated');
-    console.log(checkIsDarkMode);
-    checkIsDarkMode == 'true'
-      ? (this.darkMode = true)
-      : (this.darkMode = false);
+    // console.log(checkIsDarkMode);
+    // checkIsDarkMode == 'true'
+    //   ? (this.darkMode = true)
+    //   : (this.darkMode = false);
     document.body.classList.toggle('dark', this.darkMode);
   }
   toggleDarkMode()
