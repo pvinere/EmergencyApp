@@ -79,33 +79,47 @@
       </ng-template>      
     </ion-modal>
 
-    <ion-modal trigger="open-modal2" #passModal>
+    <ion-modal trigger="open-modal2" #passModal class="ion-modal">
       <ng-template>
         <ion-header>
           <ion-toolbar>
             <ion-buttons slot="start">
-              <ion-button (click)="confirmModal_pass()">Cancel</ion-button>
+              <ion-button (click)="dismissModal_pass()">Cancel</ion-button>
             </ion-buttons>
           
             <ion-buttons slot="end">
-              <ion-button (click)="dismissModal_pass()" [strong]="true">Confirm</ion-button>
+              <ion-button (click)="confirmModal_pass()" (click)="changePassword()"  [strong]="true">Confirm</ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
           <ion-item>
             <ion-input
+              label="Enter your E-Mail"
+              labelPlacement="stacked"
+              type="E-Mail"
+              placeholder="E-Mail"
+              [(ngModel)]="email"
+            >
+          </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
               label="Enter your old password"
               labelPlacement="stacked"
               type="password"
-              placeholder="Password"
+              placeholder="Old Password"
+              [(ngModel)]="oldPassword"
   
             ></ion-input>
+          </ion-item>
+          <ion-item>
             <ion-input
               label="Enter your new password"
               labelPlacement="stacked"
               type="password"
-              placeholder="Password"
+              placeholder="New Password"
+              [(ngModel)]="newPassword"
   
             ></ion-input>
           </ion-item>

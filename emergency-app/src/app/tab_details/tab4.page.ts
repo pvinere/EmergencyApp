@@ -1,12 +1,14 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut,reauthenticateWithCredential, AuthCredential } from "firebase/auth";
 import { Router } from '@angular/router';
 import { SharedService } from '../shared/service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import * as firebase from 'firebase/compat';
+import * as firebase from 'firebase/compat/app';
 import { take } from 'rxjs';
 import { AlertController } from '@ionic/angular';
+import 'firebase/compat/auth';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab4.page.html',
@@ -22,6 +24,9 @@ export class Tab4Page implements OnInit{
   uid: string | undefined;
   name_change:any;
   isGoogleSignInUser = false;
+  newPassword: string = '';
+  oldPassword: string = '';
+  email: string= '';
   
   
 
@@ -52,10 +57,6 @@ export class Tab4Page implements OnInit{
   }
 
   
-  
-
-  
-
   changeName(newName: string) {
     const uid = this.sharedService.uid; // Replace 'your_user_id' with the actual user ID
     this.afs.collection('users').doc(uid).update({ name: newName }) // Update the 'name' field in the 'users' collection
@@ -66,6 +67,8 @@ export class Tab4Page implements OnInit{
         console.error('Error updating name:', error);
       });
   }
+
+  
 
   async confirmModal_name(){
     
@@ -82,10 +85,38 @@ export class Tab4Page implements OnInit{
   async confirmModal_pass(){
     await this.passModal.dismiss();
     
+    
   }
 
   async dismissModal_pass() {
     await this.passModal.dismiss();
+  }
+
+  async changePassword() {
+    try {
+      const user = await this.afAuth.currentUser;
+      if (!user) {
+        throw new Error('User not signed in');
+      }
+
+      const credential = firebase.default.auth.EmailAuthProvider.credential(
+        this.email,
+        this.oldPassword
+      );
+
+      await user.reauthenticateWithCredential(credential);
+
+      await user.updatePassword(this.newPassword);
+      this.newPassword = '';
+      this.oldPassword = '';
+      // Show success message or navigate to another page
+      console.log('Password changed successfully');
+      this.presentAlertPass('Password changed successfully');
+    } catch (error) {
+      console.error('Error changing password:', error);
+      // Show error message to the user
+      this.presentAlertPass('E-Mail/Old password invalid!');
+    }
   }
 
   signOut(){
@@ -105,8 +136,23 @@ export class Tab4Page implements OnInit{
       buttons: ['OK']
     });
 
+    
+
     await alert.present();
   
+}
+
+async presentAlertPass(message: string) {
+  const alert = await this.alertController.create({
+    header: 'PASSWORD CHANGE',
+    message: message,
+    buttons: ['OK']
+  });
+
+  
+
+  await alert.present();
+
 }
 
 darkMode = true;
@@ -124,10 +170,4 @@ darkMode = true;
     this.sharedService.toggleDarkMode();
   }
   
-
-  
-
-  
-
-
 }
