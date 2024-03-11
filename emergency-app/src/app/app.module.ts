@@ -10,6 +10,7 @@ import { AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { SharedService } from './shared/service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -18,6 +19,7 @@ import { SharedService } from './shared/service';
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserModule, IonicModule.forRoot(),
+    HttpClientModule,
     AppRoutingModule, 
     AngularFireModule,
     AngularFireAuthModule,
