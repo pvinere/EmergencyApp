@@ -9,7 +9,11 @@ export class SharedService {
 
   setUID(uid: string) {
     this.uid = uid;
+    localStorage.setItem('uid', uid);
   }
 
-  constructor() { }
+  constructor() { 
+    const storedUID = localStorage.getItem('uid');
+    this.uid = storedUID !== null ? storedUID : undefined;
+  }
 }

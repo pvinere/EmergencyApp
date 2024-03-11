@@ -46,19 +46,25 @@
   ion-modal {
     align-items: center;
     padding-bottom: 4em;
-    --height: 21%;
+    --height:23%;
     --width: 100%;
     --border-radius: 10px;
     --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    
+    --webkit-font-smoothing: antialiased;
   }
   
   ion-modal::part(backdrop) {
     background: rgba(209, 213, 219);
     opacity: 10;
+    
+  }
+
+  ion-modal::part(handle) {
+    transform: none !important;
   }
   
   ion-modal ion-toolbar {
     --background: #eb445a;
     --color: white;
+    --webkit-font-smoothing: antialiase
   }

@@ -23,13 +23,16 @@ export class Tab2Page implements OnInit {
   ) 
   { }
 
-    
+ 
 
   ngOnInit(): void {
     this.afAuth.authState.subscribe(user => {
       if (user) {
+        const uid =user.uid;
         console.log("UID from tab2Home: " + this.sharedService.uid);
-        this.userName$ = this.afs.doc<any>(`users/${this.sharedService.uid}`).valueChanges().pipe(
+        localStorage.setItem('uid', uid); 
+        this.sharedService.uid = uid;
+        this.userName$ = this.afs.doc<any>(`users/${uid}`).valueChanges().pipe(
           map(userData => {
             
             if (userData) {

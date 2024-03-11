@@ -1,30 +1,54 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { getAuth, signOut } from "firebase/auth";
 import { Router } from '@angular/router';
-import { getDatabase,ref,set } from "firebase/database";
 import { SharedService } from '../shared/service';
-
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components'
-
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import * as firebase from 'firebase/compat';
+import { take } from 'rxjs';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab4.page.html',
   styleUrls: ['tab4.page.scss']
 })
 export class Tab4Page implements OnInit{
-  @ViewChild(IonModal) modal: IonModal | undefined;
+  @ViewChild('nameModal') nameModal: any;
+  @ViewChild('passModal') passModal: any;
+ 
 
-  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+  message = 'Name change succesfuly!';
   name: string | undefined;
-
+  uid: string | undefined;
+  name_change:any;
+  isGoogleSignInUser = false;
+  
+  
 
   constructor(public router: Router, 
+    private afs: AngularFirestore,
+    private afAuth: AngularFireAuth,
+    private alertController: AlertController,
     @Inject(SharedService)private sharedService: SharedService) {
-    
+      this.uid = this.sharedService.uid;
   }
   ngOnInit(): void {
     this.checkAppMode();
+    this.checkGoogleSignInUser();
+  }
+
+  ionViewWillEnter() {
+    this.checkGoogleSignInUser();
+  }
+
+  async checkGoogleSignInUser() {
+    const user = await this.afAuth.authState.pipe(take(1)).toPromise(); // Get the current user
+    if (user) {
+      const providerId = user.providerData[0]?.providerId; // Get the provider ID of the first provider
+      if (providerId === 'google.com') {
+        this.isGoogleSignInUser = true; // User has signed in with Google
+      }
+    }
   }
 
   
@@ -34,6 +58,8 @@ export class Tab4Page implements OnInit{
    signOut(){
     const auth = getAuth();
     signOut(auth).then(() => {
+      localStorage.removeItem('uid');
+      this.sharedService.uid = undefined;
       this.router.navigate(['/first-page']);
     })
 
@@ -63,40 +89,56 @@ export class Tab4Page implements OnInit{
 
   
 
-  changeName(name_change: any)
-  {
-    
-      const db = getDatabase();
-      set(ref(db, 'users/' + this.sharedService.uid), {
-        name: name_change
+  changeName(newName: string) {
+    const uid = this.sharedService.uid; // Replace 'your_user_id' with the actual user ID
+    this.afs.collection('users').doc(uid).update({ name: newName }) // Update the 'name' field in the 'users' collection
+      .then(() => {
+        console.log('Name updated successfully');
+      })
+      .catch(error => {
+        console.error('Error updating name:', error);
       });
+  }
+
+  async confirmModal_name(){
+    
+    console.log('name_change',this.name_change);
+    this.changeName(this.name_change);
+    await this.nameModal.dismiss();
+    this.presentAlert(this.message);
+  }
+
+  async dismissModal_name() {
+    await this.nameModal.dismiss();
+  }
+
+  async confirmModal_pass(){
+    await this.passModal.dismiss();
     
   }
 
-  cancel() {
-    if (this.modal) {
-      this.modal.dismiss(null, 'cancel');
-    } else {
-      console.error("Modal is not initialized!");
-    }
+  async dismissModal_pass() {
+    await this.passModal.dismiss();
   }
 
-  confirm() {
-    if (this.modal){
-      this.modal.dismiss(this.name, 'confirm');
-    }
-    else{
-      console.error("Modal is not initialized!");
-    }
-    
-  }
+ 
+  
+ 
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'NAME CHANGED',
+      message: message,
+      buttons: ['OK']
+    });
 
-  onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-      this.message = `Hello, ${ev.detail.data}!`;
-    }
-  }
+    await alert.present();
+  
+}
+  
+
+  
+
+  
 
 
 }
