@@ -52,40 +52,7 @@ export class Tab4Page implements OnInit{
   }
 
   
-  darkMode = false;
   
-  
-   signOut(){
-    const auth = getAuth();
-    signOut(auth).then(() => {
-      localStorage.removeItem('uid');
-      this.sharedService.uid = undefined;
-      this.router.navigate(['/first-page']);
-    })
-
-   }
-
-  async checkAppMode() {
-  
-    const checkIsDarkMode = localStorage.getItem('darkModeActivated');
-    // console.log(checkIsDarkMode);
-    // checkIsDarkMode == 'true'
-    //   ? (this.darkMode = true)
-    //   : (this.darkMode = false);
-    document.body.classList.toggle('dark', this.darkMode);
-  }
-  toggleDarkMode()
-  {
-    this.darkMode = !this.darkMode;
-    document.body.classList.toggle('dark',this.darkMode);
-    if(this.darkMode){
-      localStorage.setItem('darkModeActivated','true');
-    }
-    else
-    {
-      localStorage.setItem('darkModeActivated','false');
-    }
-  }
 
   
 
@@ -121,8 +88,15 @@ export class Tab4Page implements OnInit{
     await this.passModal.dismiss();
   }
 
- 
-  
+  signOut(){
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      localStorage.removeItem('uid');
+      this.sharedService.uid = undefined;
+      this.router.navigate(['/first-page']);
+    })
+
+   }
  
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
@@ -134,6 +108,21 @@ export class Tab4Page implements OnInit{
     await alert.present();
   
 }
+
+darkMode = true;
+
+  async checkAppMode() {
+  
+    const checkIsDarkMode = localStorage.getItem('darkModeActivated');
+    console.log(checkIsDarkMode);
+    checkIsDarkMode == 'true'
+      ? (this.darkMode = true)
+      : (this.darkMode = false);
+    document.body.classList.toggle('dark', this.darkMode);
+  }
+  toggleDarkMode() {
+    this.sharedService.toggleDarkMode();
+  }
   
 
   

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Inject, OnInit } from '@angular/core';
+import { SharedService } from '../shared/service';
 
 @Component({
   selector: 'app-first-page',
@@ -8,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FirstPagePage implements OnInit {
 
-  constructor() { }
+  constructor( @Inject(SharedService)private sharedService: SharedService) { }
 
   ngOnInit() {
+    
   }
   
-
+  
 }
