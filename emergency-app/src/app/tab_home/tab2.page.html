@@ -10,6 +10,25 @@
     <div *ngIf="userName$ | async as userName">
       <p>Welcome, {{ userName }}!</p>
       <p>You are now in {{currentCity}}, {{currentCountry}}</p>
+      <p>The emergeny number for {{currentCountry}} is 112</p>
+
+
+      <div>Emergency numbers around the world</div>
+      <ion-searchbar></ion-searchbar>
+      
+        <ion-list *ngIf="jsonData">
+          <ion-item *ngFor="let item of jsonData.data">
+            <ion-label>
+              <h2>{{ item.Country.Name }}</h2>
+              <p>Ambulance: {{ item.Ambulance.All[0] }}</p>
+              <p>Fire: {{ item.Fire.All[0] }}</p>
+              <p>Police: {{ item.Police.All[0] }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      
+      
+
     </div>
     <div>
       

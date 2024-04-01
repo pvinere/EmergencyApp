@@ -18,6 +18,7 @@ export class Tab2Page implements OnInit {
   currentCountry: any;
   latitude: number | undefined;
   longitude: number | undefined;
+  jsonData: any;
 
   constructor(
     public authService: AuthenticationService,
@@ -60,9 +61,15 @@ export class Tab2Page implements OnInit {
     });
   }
 
+  loadJSON() {
+    this.http.get('assets/database_numbers.json').subscribe((data) => {
+      this.jsonData = data;
+    });
+  }
+
  
   ngOnInit(): void {
-    
+    this.loadJSON();
     this.getCityName();
     
     
