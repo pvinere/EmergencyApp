@@ -110,22 +110,20 @@ export class Tab2Page implements OnInit {
 searchBarEmpty: boolean = true;
   lastSearchQuery: string = '';
 
-filterCountries(event: Event) {
-  const query: string = (event.target as HTMLInputElement).value.trim().toLowerCase();
-  this.searchQuery = query;
+  filterCountries(event: Event) {
+    const query: string = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.searchQuery = query;
 
-  if (query !== '') {
-    this.filteredData = this.jsonData.data.filter((item: any) => {
-      return item.Country.Name.toLowerCase().includes(query);
-    });
-    this.lastSearchQuery = query; // Update the last search query
-  } else {
-    // If the search bar is empty, reset the filtered data to display all countries
-    if (this.lastSearchQuery !== '') {
-      this.filteredData = [...this.jsonData.data];
-      this.lastSearchQuery = ''; // Reset the last search query
+    if (query === '') {
+      // If search query is empty, clear filtered data
+      this.filteredData = [];
+    } else {
+      // If search query is not empty, filter data based on query
+      this.filteredData = this.jsonData.data.filter((item: any) => {
+        return item.Country.Name.toLowerCase().includes(query);
+      });
     }
   }
 }
 
-}
+

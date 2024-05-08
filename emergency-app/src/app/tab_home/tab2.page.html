@@ -16,10 +16,10 @@
 
 
       <div class="pad">Emergency numbers around the world</div>
-      <ion-searchbar (ionChange)="filterCountries($event)" debounce="500"></ion-searchbar>
+      <ion-searchbar placeholder="Country name" (ionChange)="filterCountries($event)" debounce="500"></ion-searchbar>
 
       
-        <ion-list *ngIf="searchBarEmpty || filteredData.length > 0">
+      <ion-list *ngIf="searchQuery !== '' && filteredData.length > 0">
           <ion-item *ngFor="let item of filteredData">
             <ion-label>
               <h2>{{ item.Country.Name }}</h2>
