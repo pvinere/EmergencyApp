@@ -19,6 +19,9 @@ export class Tab2Page implements OnInit {
   latitude: number | undefined;
   longitude: number | undefined;
   jsonData: any;
+  filteredData: any;
+  searchQuery: string = '';
+  
 
   constructor(
     public authService: AuthenticationService,
@@ -64,10 +67,16 @@ export class Tab2Page implements OnInit {
   loadJSON() {
     this.http.get('assets/database_numbers.json').subscribe((data) => {
       this.jsonData = data;
+      this.filteredData = [...this.jsonData];
+      
     });
   }
 
- 
+  
+  
+  
+
+  
   ngOnInit(): void {
     this.loadJSON();
     this.getCityName();
@@ -94,6 +103,29 @@ export class Tab2Page implements OnInit {
       }
     });
 
+}
+
+
+
+searchBarEmpty: boolean = true;
+  lastSearchQuery: string = '';
+
+filterCountries(event: Event) {
+  const query: string = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  this.searchQuery = query;
+
+  if (query !== '') {
+    this.filteredData = this.jsonData.data.filter((item: any) => {
+      return item.Country.Name.toLowerCase().includes(query);
+    });
+    this.lastSearchQuery = query; // Update the last search query
+  } else {
+    // If the search bar is empty, reset the filtered data to display all countries
+    if (this.lastSearchQuery !== '') {
+      this.filteredData = [...this.jsonData.data];
+      this.lastSearchQuery = ''; // Reset the last search query
+    }
+  }
 }
 
 }

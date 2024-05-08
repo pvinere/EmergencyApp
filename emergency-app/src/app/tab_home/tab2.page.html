@@ -5,19 +5,22 @@
         
       </ion-toolbar>
     </ion-header>
+
+    
   
-    <app-explore-container name="Home page"></app-explore-container>
+
     <div *ngIf="userName$ | async as userName">
       <p>Welcome, {{ userName }}!</p>
       <p>You are now in {{currentCity}}, {{currentCountry}}</p>
       <p>The emergeny number for {{currentCountry}} is 112</p>
 
 
-      <div>Emergency numbers around the world</div>
-      <ion-searchbar></ion-searchbar>
+      <div class="pad">Emergency numbers around the world</div>
+      <ion-searchbar (ionChange)="filterCountries($event)" debounce="500"></ion-searchbar>
+
       
-        <ion-list *ngIf="jsonData">
-          <ion-item *ngFor="let item of jsonData.data">
+        <ion-list *ngIf="searchBarEmpty || filteredData.length > 0">
+          <ion-item *ngFor="let item of filteredData">
             <ion-label>
               <h2>{{ item.Country.Name }}</h2>
               <p>Ambulance: {{ item.Ambulance.All[0] }}</p>
@@ -26,6 +29,8 @@
             </ion-label>
           </ion-item>
         </ion-list>
+
+      
       
       
 
