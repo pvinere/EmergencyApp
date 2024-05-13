@@ -6,14 +6,10 @@
       </ion-toolbar>
     </ion-header>
 
-    
-  
-
     <div *ngIf="userName$ | async as userName">
       <p>Welcome, {{ userName }}!</p>
       <p>You are now in {{currentCity}}, {{currentCountry}}</p>
-      <p>The emergeny number for {{currentCountry}} is 112</p>
-
+      <p *ngIf="currentCountry">The emergency number for {{currentCountry}} is {{ getEmergencyNumber(currentCountry) }}</p>
 
       <div class="pad">Search emergency numbers around the world:</div>
       <ion-searchbar placeholder="Country name" (ionChange)="filterCountries($event)" debounce="500"></ion-searchbar>
@@ -30,7 +26,6 @@
           </ion-item>
         </ion-list>
 
-      
     </div>
     <div>
       

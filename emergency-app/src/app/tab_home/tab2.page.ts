@@ -45,10 +45,10 @@ export class Tab2Page implements OnInit {
     const coordinates = await Geolocation.getCurrentPosition();
     this.latitude = coordinates.coords.latitude;
     this.longitude = coordinates.coords.longitude;
+
     console.log('Current position:', this.latitude , this.longitude);
     
     this.getLocationData(this.latitude, this.longitude).subscribe((data) => {
-      // Log the data received from the API
       console.log('Response from Nominatim API:', data);
       
       
@@ -58,6 +58,12 @@ export class Tab2Page implements OnInit {
         this.currentCity = city;
         this.currentCountry = country;
         console.log('Current city:', this.currentCity);
+        const emergencyNumber = this.getEmergencyNumber(country);
+        if (emergencyNumber) {
+          console.log('Emergency number for', country, ':', emergencyNumber);
+        } else {
+          console.log('Emergency number not found for', country);
+        }
       } else {
         console.log('City not found in the response');
       }
@@ -71,6 +77,15 @@ export class Tab2Page implements OnInit {
       
     });
   }
+
+  getEmergencyNumber(country: string): string | null {
+    const countryData = this.jsonData.data.find((item: any) => item.Country.Name === country);
+    if (countryData) {
+      return countryData.Ambulance.All[0] || null; 
+    }
+    return null; 
+  }
+  
 
   
   
@@ -103,7 +118,11 @@ export class Tab2Page implements OnInit {
       }
     });
 
+    
+
 }
+
+
 
 
 
@@ -115,10 +134,10 @@ searchBarEmpty: boolean = true;
     this.searchQuery = query;
 
     if (query === '') {
-      // If search query is empty, clear filtered data
+     
       this.filteredData = [];
     } else {
-      // If search query is not empty, filter data based on query
+      
       this.filteredData = this.jsonData.data.filter((item: any) => {
         return item.Country.Name.toLowerCase().includes(query);
       });
