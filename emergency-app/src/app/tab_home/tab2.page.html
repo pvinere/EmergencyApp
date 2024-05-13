@@ -24,7 +24,7 @@
         <ion-item class="info-text" class="pad-text" *ngIf="currentCountry">The emergency number for &nbsp;<p class="city">{{currentCountry}}</p> </ion-item>
         
         <p class="nr-text" *ngIf="currentCountry"> - {{ getEmergencyNumber(currentCountry) }} - </p>
-        <a href="tel:112"><div class="center"><ion-button class="info-text"><ion-icon name="call-outline"></ion-icon>CALL EMERGENY</ion-button></div></a>
+        <a href="tel:{{ getEmergencyNumber(currentCountry) }}"><div class="center"><ion-button class="info-text"><ion-icon name="call-outline"></ion-icon>CALL EMERGENY</ion-button></div></a>
       </ion-card>
 
       <ion-card>
