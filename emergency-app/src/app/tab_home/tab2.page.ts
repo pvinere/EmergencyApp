@@ -41,11 +41,7 @@ export class Tab2Page implements OnInit {
     
 }
 
-  makeCall()
-  {
-    var phoneNumber = '112';
-    window.location.href = 'tel:' + phoneNumber;
-  }
+ 
 
   async getCityName() {
     const coordinates = await Geolocation.getCurrentPosition();
