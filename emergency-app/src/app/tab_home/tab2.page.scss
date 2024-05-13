@@ -1,3 +1,90 @@
 .pad{
     padding-top: 20%;
 }
+
+.back-css {
+    /* Stilurile pentru imaginea de fundal */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    background-position: center;
+    background-size: cover;    
+    animation-name: fadeInOut;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite; /* Transparenta de 50% */
+    }
+
+.info-text{
+    font-size: 1.3em;
+    text-align:justify;
+    
+}
+.space{
+    padding-top: 2em;
+}
+
+.nr-text{
+    
+    font-size: 2.6em;
+    font-weight: bold;
+    text-align:center;
+    color:#ff4136;
+}
+
+
+
+.pad-text{
+    padding-top: 0.1em;
+    padding-right: 1em;
+    padding-left:1em;
+    font-size: 1.35em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.info{
+    --border-radius: 15px;
+    margin-top: 3em;
+}
+
+.info-card{
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.img-size {
+    padding-top: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    
+}
+
+.name{
+    font-weight: bold;
+    
+}
+
+.city{
+    font-weight: bold;
+}
+
+.search-title{
+    font-size: 1.3em;
+    text-align:justify;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.search{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1em;
+}
+
+.center{
+    text-align: center;
+    margin-bottom: 2em;
+}

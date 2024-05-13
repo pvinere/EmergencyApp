@@ -6,25 +6,44 @@
       </ion-toolbar>
     </ion-header>
 
-    <div *ngIf="userName$ | async as userName">
-      <p>Welcome, {{ userName }}!</p>
-      <p>You are now in {{currentCity}}, {{currentCountry}}</p>
-      <p *ngIf="currentCountry">The emergency number for {{currentCountry}} is {{ getEmergencyNumber(currentCountry) }}</p>
 
-      <div class="pad">Search emergency numbers around the world:</div>
+    <div class="back-css" style="background-image: url('assets/images/back3.jpg')"></div>
+    <div class="info">
+    <ion-card>
+      <img class="img-size"alt="Img" src="assets/logos/logo-no-background.png" />
+      <ion-card-content class="img-size">
+        2024 Created by Vinereanu Puiu-Andrei 
+      </ion-card-content>
+    </ion-card>
+  </div>
+      <div *ngIf="userName$ | async as userName">
+      <ion-card class="info-card">
+        <div class="space"></div>
+        <ion-item class="info-text" class="pad-text">Welcome,&nbsp; <i class="name"> {{ userName }}</i>&nbsp;!</ion-item>
+        <ion-item class="info-text" class="pad-text">You are now in &nbsp; <p class="city">{{currentCity}}, {{currentCountry}}</p></ion-item>
+        <ion-item class="info-text" class="pad-text" *ngIf="currentCountry">The emergency number for &nbsp;<p class="city">{{currentCountry}}</p> </ion-item>
+        
+        <p class="nr-text" *ngIf="currentCountry"> - {{ getEmergencyNumber(currentCountry) }} - </p>
+        <div class="center"><ion-button class="info-text"><ion-icon name="call-outline"></ion-icon>CALL EMERGENY</ion-button></div>
+      </ion-card>
+
+      <ion-card>
+      <ion-item class="info-text" class="pad-text">Search emergency numbers:</ion-item>
       <ion-searchbar placeholder="Country name" (ionChange)="filterCountries($event)" debounce="500"></ion-searchbar>
-
+    
       
-      <ion-list *ngIf="searchQuery !== '' && filteredData.length > 0">
+      <ion-card *ngIf="searchQuery !== '' && filteredData.length > 0">
           <ion-item *ngFor="let item of filteredData">
             <ion-label>
-              <h2>{{ item.Country.Name }}</h2>
-              <p>Ambulance: {{ item.Ambulance.All[0] }}</p>
-              <p>Fire: {{ item.Fire.All[0] }}</p>
-              <p>Police: {{ item.Police.All[0] }}</p>
+              <h1 class="search-title">{{ item.Country.Name }}</h1>
+              <p class="search">Ambulance: {{ item.Ambulance.All[0] }}</p>
+              <p class="search">Fire: {{ item.Fire.All[0] }}</p>
+              <p class="search">Police: {{ item.Police.All[0] }}</p>
             </ion-label>
           </ion-item>
-        </ion-list>
+        </ion-card>
+
+      </ion-card>
 
     </div>
     <div>
