@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" scrollY="false">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Tab 3</ion-title>
@@ -7,10 +7,43 @@
 
   <ion-item class='title-card'>
     <div class="title">
-      
-      Emergency Database Informations
+      Emergency
     </div>
   </ion-item>
-
-  <app-explore-container name="IN WORK - DATABASE WITH WHAT TO DO IN CASE OF SOME EMERGENCY + INTEGRATED CHATGPT"></app-explore-container>
+  <ion-content>
+  <div>
+    
+    <div class="absolute inset-4 ">
+      <div class="center-div rounded-md border-zinc-200 bg-white p-2 relative h-full w-full overflow-clip border px-0 py-0">
+        <iframe style="border: none; height: 92vh;" srcdoc="<body><script src='https://cdn.botpress.cloud/webchat/v0/inject.js'></script>
+            <script>
+              window.botpressWebChat.init({
+                  'composerPlaceholder': 'Chat with the Emergency Bot',
+                  'botConversationDescription': 'A Bot that helps you with your emergency needs',
+                  'botName': 'EMERGENY BOT',
+                  'botId': 'b286c4e1-1770-43b6-ae51-545fedb28668',
+                  'hostUrl': 'https://cdn.botpress.cloud/webchat/v0',
+                  'messagingUrl': 'https://messaging.botpress.cloud',
+                  'clientId': 'b286c4e1-1770-43b6-ae51-545fedb28668',
+                  'enableConversationDeletion': true,
+                  'showPoweredBy': true,
+                  'className': 'webchatIframe',
+                  'containerWidth': '100%25',
+                  'layoutWidth': '100%25',
+                  'hideWidget': true,
+                  'showCloseButton': false,
+                  'disableAnimations': true,
+                  'closeOnEscape': false,
+                  'showConversationsButton': false,
+                  'enableTranscriptDownload': false,
+                  'stylesheet':'https://webchat-styler-css.botpress.app/prod/code/b286c4e1-1770-43b6-ae51-545fedb28668/v31782/style.css'
+                  
+              });
+            window.botpressWebChat.onEvent(function () { window.botpressWebChat.sendEvent({ type: 'show' }) }, ['LIFECYCLE.LOADED']);
+            </script></body>" width="100%" height="100%"></iframe>
+      </div>
+    </div>
+  </div>
 </ion-content>
+</ion-content>
+
