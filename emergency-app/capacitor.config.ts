@@ -5,7 +5,8 @@ const config: CapacitorConfig = {
   appName: 'EmergencyApp',
   webDir: 'www',
   server: {
-    androidScheme: 'http://localhost:8100/first-page'
+    androidScheme: 'http://localhost:8100/first-page',
+    cleartext: true
   },
   plugins: {
     GoogleAuth: {
