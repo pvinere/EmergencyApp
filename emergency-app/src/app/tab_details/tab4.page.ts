@@ -37,10 +37,13 @@ export class Tab4Page implements OnInit{
     @Inject(SharedService)private sharedService: SharedService) {
       this.uid = this.sharedService.uid;
   }
+  
   ngOnInit(): void {
     this.checkAppMode();
     this.checkGoogleSignInUser();
   }
+
+  
 
   ionViewWillEnter() {
     this.checkGoogleSignInUser();
@@ -55,6 +58,8 @@ export class Tab4Page implements OnInit{
       }
     }
   }
+
+  
 
   
   changeName(newName: string) {

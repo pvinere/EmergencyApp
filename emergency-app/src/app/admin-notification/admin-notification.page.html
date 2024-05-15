@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Notification System</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Notification System</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item>
+    <ion-label position="floating">Title</ion-label>
+    <ion-input type="text" [(ngModel)]="title"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Level</ion-label>
+    <ion-select [(ngModel)]="nivel">
+      <ion-select-option value="1">1</ion-select-option>
+      <ion-select-option value="2">2</ion-select-option>
+      <ion-select-option value="3">3</ion-select-option>
+      <ion-select-option value="4">4</ion-select-option>
+      <ion-select-option value="5">5</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item class="center">
+    <ion-label position="floating"></ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="timeAndDate"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Description</ion-label>
+    <ion-textarea [(ngModel)]="description"></ion-textarea>
+  </ion-item>
+
+  <ion-button expand="full" style="margin-top: 20px; margin-left:5em; margin-right: 5em;" (click)="sendNotification()">Send</ion-button>
+  <ion-button expand="full" style="margin-top: 40px; margin-left:5em; margin-right: 5em;" (click)="logout()">Logout</ion-button>
+</ion-content>
