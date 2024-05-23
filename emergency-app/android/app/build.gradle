@@ -43,6 +43,8 @@ dependencies {
 }
 
 apply from: 'capacitor.build.gradle'
+apply plugin: 'com.google.gms.google-services'
+classpath 'com.google.gms:google-services:4.3.10'
 
 try {
     def servicesJSON = file('google-services.json')
