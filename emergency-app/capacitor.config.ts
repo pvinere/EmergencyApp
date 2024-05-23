@@ -1,13 +1,9 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'com.puiu.emergencyapp',
   appName: 'EmergencyApp',
   webDir: 'www',
-  server: {
-    androidScheme: 'http://localhost:8100/first-page',
-    cleartext: true
-  },
   plugins: {
     GoogleAuth: {
       scopes: ["profile","email"],

@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.puiu.emergencyapp;
 
 import com.getcapacitor.BridgeActivity;
 

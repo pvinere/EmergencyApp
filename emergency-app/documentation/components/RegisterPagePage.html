@@ -1,0 +1,987 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>emergency-app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">emergency-app documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  RegisterPagePage</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/register-page/register-page.page.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-register-page</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./register-page.page.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./register-page.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <a href="#formReg" >formReg</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#router" >router</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#passwordMatchValidator" >passwordMatchValidator</a>
+                            </li>
+                            <li>
+                                <a href="#signUp" >signUp</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#passwordFormField" >passwordFormField</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(authService: <a href="../injectables/AuthenticationService.html" target="_self">AuthenticationService</a>, router: Router, afs: AngularFirestore, sharedService: <a href="../injectables/SharedService.html" target="_self">SharedService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/register-page/register-page.page.ts:16</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthenticationService.html" target="_self" >AuthenticationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>afs</td>
+                                                  
+                                                        <td>
+                                                                    <code>AngularFirestore</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>sharedService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/SharedService.html" target="_self" >SharedService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/register-page/register-page.page.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="passwordMatchValidator"></a>
+                    <span class="name">
+                        <span ><b>passwordMatchValidator</b></span>
+                        <a href="#passwordMatchValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>passwordMatchValidator(control: AbstractControl)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/register-page/register-page.page.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>control</td>
+                                            <td>
+                                                        <code>AbstractControl</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>{ mismatch: boolean; }</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signUp"></a>
+                    <span class="name">
+                        <span ><b>signUp</b></span>
+                        <a href="#signUp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>signUp(email: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, password: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, name: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/app/register-page/register-page.page.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>email</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>password</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/AuthenticationService.html" target="_self" >AuthenticationService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/register-page/register-page.page.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formReg"></a>
+                    <span class="name">
+                        <span ><b>formReg</b></span>
+                        <a href="#formReg"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormGroup</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/register-page/register-page.page.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Router</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/register-page/register-page.page.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="passwordFormField"></a>
+                        <span class="name"><b>passwordFormField</b><a href="#passwordFormField"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>passwordFormField()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/register-page/register-page.page.ts:91</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, OnInit } from &#x27;@angular/core&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { AuthenticationService } from &#x27;../shared/authentication-service&#x27;;
+import { AbstractControl, FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { SharedService } from &#x27;../shared/service&#x27;;
+import { AngularFirestore } from &#x27;@angular/fire/compat/firestore&#x27;;
+
+
+@Component({
+  selector: &#x27;app-register-page&#x27;,
+  templateUrl: &#x27;./register-page.page.html&#x27;,
+  styleUrls: [&#x27;./register-page.page.scss&#x27;],
+})
+export class RegisterPagePage implements OnInit {
+  
+formReg: FormGroup;
+
+  constructor(
+    public authService: AuthenticationService,
+    public router: Router,
+    private afs: AngularFirestore,
+    @Inject(SharedService)private sharedService: SharedService
+  ) {
+    this.formReg &#x3D; new FormGroup({
+      name: new FormControl(&#x27;&#x27;, [Validators.required, Validators.minLength(3)]),
+      email: new FormControl(&#x27;&#x27;, [Validators.required, Validators.email]),
+      password: new FormControl(&#x27;&#x27;, [Validators.required, Validators.minLength(8)],),
+      confirmPassword: new FormControl(&#x27;&#x27;, [Validators.required]),
+    },
+    {
+      validators : this.passwordMatchValidator
+    }
+    );
+    
+  }
+
+  ngOnInit() {
+  
+  }
+
+  // signUp2(email: any, password: any, name: any)
+  // {
+  //   const auth &#x3D; getAuth();
+  //   createUserWithEmailAndPassword(auth, email, password)
+  //   .then((userCredential) &#x3D;&gt; { 
+  //     const user &#x3D; userCredential.user;
+  //     const uid &#x3D; user.uid;
+  //     this.afs.collection(&#x27;users&#x27;).doc(uid).set({
+  //       name: name.value,
+  //       email: email.value,
+  //       uid: uid
+  //     });
+  //     this.sharedService.uid &#x3D; uid;
+  //     this.router.navigate([&#x27;/tabs/home&#x27;]); 
+  //   }).catch((error) &#x3D;&gt; {
+  //     window.alert(error.message);
+  //     const errorCode &#x3D; error.code;
+  //     const errorMessage &#x3D; error.message;
+  //   });
+  // }
+
+
+  signUp(email: any, password: any, name: any) {
+    this.authService
+      .RegisterUser(email.value, password.value)
+      .then((res) &#x3D;&gt; {
+        if (res &amp;&amp; res.user) {
+          const uid &#x3D; res.user.uid;
+          this.afs.collection(&#x27;users&#x27;).doc(uid).set({
+            name: name.value,
+            email: email.value,
+            uid: uid
+          });
+          this.sharedService.uid &#x3D; uid;
+          this.router.navigate([&#x27;/tabs/home&#x27;]);
+        } else {
+          // Handle the case where res.user is null
+          console.error(&quot;User data not available&quot;);
+        }
+        
+      })
+      .catch((error) &#x3D;&gt; {
+        window.alert(error.message);
+      });
+  }
+  
+  passwordMatchValidator(control: AbstractControl) {
+    return control.get(&#x27;password&#x27;)?.value &#x3D;&#x3D;&#x3D; control.get(&#x27;confirmPassword&#x27;)?.value ? null : { mismatch: true };
+  }
+
+  get passwordFormField() {
+  
+    return this.formReg.get(&#x27;password&#x27;);
+  
+  }
+
+ 
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">
+&lt;ion-content class&#x3D;&quot;ion-padding ion-flex ion-justify-content-center ion-align-items-center&quot;&gt;
+  &lt;img src&#x3D;&quot;assets/logos/logo-no-background.png&quot; alt&#x3D;&quot;Logo&quot; class&#x3D;&quot;logo&quot;&gt;
+  &lt;div class&#x3D;&quot;ion-text-center&quot;&gt;Register&lt;/div&gt;
+
+  
+
+  &lt;form [formGroup]&#x3D;&quot;formReg&quot;&gt;
+  &lt;div class&#x3D;&quot;labels&quot;&gt;
+
+    &lt;ion-input class&#x3D;&quot;ltext&quot; formControlName&#x3D;&quot;name&quot; label&#x3D;&quot;Name&quot;  label-placement&#x3D;&quot;floating&quot; fill&#x3D;&quot;outline&quot; placeholder&#x3D;&quot;Enter your name&quot; autocomplete&#x3D;&quot;disabled&quot; type&#x3D;&quot;text&quot; #name required &gt;&lt;/ion-input&gt;
+      &lt;div *ngIf&#x3D;&quot;formReg.controls[&#x27;name&#x27;].hasError(&#x27;minlength&#x27;) &amp;&amp; formReg?.touched&quot; class&#x3D;&quot;error-text&quot;&gt;
+        Name must be atleast 4 characters long!
+     &lt;/div&gt;
+  
+    &lt;ion-input class&#x3D;&quot;ltext&quot; formControlName&#x3D;&quot;email&quot; label&#x3D;&quot;E-Mail&quot; label-placement&#x3D;&quot;floating&quot; fill&#x3D;&quot;outline&quot; placeholder&#x3D;&quot;Enter E-Mail&quot; autocomplete&#x3D;&quot;disabled&quot; type&#x3D;&quot;text&quot; #email required &gt;&lt;/ion-input&gt;
+    &lt;div *ngIf&#x3D;&quot;formReg.controls[&#x27;email&#x27;].hasError(&#x27;email&#x27;) &amp;&amp; formReg?.touched&quot; class&#x3D;&quot;error-text&quot;&gt;
+      The E-Mail is invalid!
+   &lt;/div&gt; 
+
+    &lt;ion-input class&#x3D;&quot;lpass&quot; formControlName&#x3D;&quot;password&quot; label&#x3D;&quot;Type a new password&quot; label-placement&#x3D;&quot;floating&quot; fill&#x3D;&quot;outline&quot; placeholder&#x3D;&quot;Type a new password&quot; type&#x3D;&quot;password&quot; #password required autocomplete&#x3D;&quot;disabled&quot;&gt;&lt;/ion-input&gt;
+    &lt;div *ngIf&#x3D;&quot;formReg.controls[&#x27;password&#x27;].hasError(&#x27;minlength&#x27;) &amp;&amp; formReg?.touched&quot; class&#x3D;&quot;error-text&quot;&gt;
+      The password must be 8 characters long!
+   &lt;/div&gt; 
+    &lt;ion-input class&#x3D;&quot;lpass&quot; formControlName&#x3D;&quot;confirmPassword&quot; label&#x3D;&quot;Re-enter the new Password&quot; label-placement&#x3D;&quot;floating&quot; fill&#x3D;&quot;outline&quot; placeholder&#x3D;&quot;Re-enter the new Password&quot; type&#x3D;&quot;password&quot; #password required autocomplete&#x3D;&quot;disabled&quot; &gt;&lt;/ion-input&gt;  
+    &lt;div *ngIf&#x3D;&quot;formReg?.errors?.[&#x27;mismatch&#x27;] &amp;&amp; formReg?.touched&quot; class&#x3D;&quot;error-text&quot;&gt;
+        Password must match!
+      &lt;/div&gt;
+  &lt;/div&gt;
+
+    &lt;ion-button [disabled]&#x3D;&quot;!formReg.valid&quot; class&#x3D;&quot;button-size&quot; (click)&#x3D;&quot;signUp(email, password,name)&quot; shape&#x3D;&quot;round&quot;&gt;
+      &lt;ion-icon name&#x3D;&quot;enter-outline&quot;&gt;&lt;/ion-icon&gt;
+    &lt;/ion-button&gt;
+
+    &lt;div class&#x3D;&quot;ion-text-center&quot;&gt;
+      &lt;ion-button [routerLink]&#x3D;&quot;[&#x27;/first-page&#x27;]&quot; class&#x3D;&quot;back-button&quot; shape&#x3D;&quot;round&quot;&gt;
+          &lt;ion-icon name&#x3D;&quot;arrow-back-circle-outline&quot;&gt;&lt;/ion-icon&gt;
+      &lt;/ion-button&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+
+
+
+  
+
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./register-page.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.labels{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+   
+}
+
+.ltext{
+    margin-bottom: 1rem;
+}
+
+.lpass{
+    margin-bottom: 1rem;
+}
+
+.button-size{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 45%;
+    font-size: 3rem;
+    padding: 1.1rem;
+    margin-top: 2rem;
+}
+
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4rem;
+    width: 90%;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+.register {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.error-text {
+    text-align: center;
+    color: red;
+    font-size: 1rem;
+    margin-bottom: 1em;
+    
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-content class="ion-padding ion-flex ion-justify-content-center ion-align-items-center">  <img src="assets/logos/logo-no-background.png" alt="Logo" class="logo">  <div class="ion-text-center">Register</div>    <form [formGroup]="formReg">  <div class="labels">    <ion-input class="ltext" formControlName="name" label="Name"  label-placement="floating" fill="outline" placeholder="Enter your name" autocomplete="disabled" type="text" #name required ></ion-input>      <div *ngIf="formReg.controls[\'name\'].hasError(\'minlength\') && formReg?.touched" class="error-text">        Name must be atleast 4 characters long!     </div>      <ion-input class="ltext" formControlName="email" label="E-Mail" label-placement="floating" fill="outline" placeholder="Enter E-Mail" autocomplete="disabled" type="text" #email required ></ion-input>    <div *ngIf="formReg.controls[\'email\'].hasError(\'email\') && formReg?.touched" class="error-text">      The E-Mail is invalid!   </div>     <ion-input class="lpass" formControlName="password" label="Type a new password" label-placement="floating" fill="outline" placeholder="Type a new password" type="password" #password required autocomplete="disabled"></ion-input>    <div *ngIf="formReg.controls[\'password\'].hasError(\'minlength\') && formReg?.touched" class="error-text">      The password must be 8 characters long!   </div>     <ion-input class="lpass" formControlName="confirmPassword" label="Re-enter the new Password" label-placement="floating" fill="outline" placeholder="Re-enter the new Password" type="password" #password required autocomplete="disabled" ></ion-input>      <div *ngIf="formReg?.errors?.[\'mismatch\'] && formReg?.touched" class="error-text">        Password must match!      </div>  </div>    <ion-button [disabled]="!formReg.valid" class="button-size" (click)="signUp(email, password,name)" shape="round">      <ion-icon name="enter-outline"></ion-icon>    </ion-button>    <div class="ion-text-center">      <ion-button [routerLink]="[\'/first-page\']" class="back-button" shape="round">          <ion-icon name="arrow-back-circle-outline"></ion-icon>      </ion-button>    </div>  </form>  </ion-content></div>'
+    var COMPONENTS = [{'name': 'AdminNotificationPage', 'selector': 'app-admin-notification'},{'name': 'AdminPage', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ExploreContainerComponent', 'selector': 'app-explore-container'},{'name': 'FirstPagePage', 'selector': 'app-first-page'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'RegisterPagePage', 'selector': 'app-register-page'},{'name': 'Tab1Page', 'selector': 'app-tab1'},{'name': 'Tab2Page', 'selector': 'app-tab2'},{'name': 'Tab3Page', 'selector': 'app-tab3'},{'name': 'Tab4Page', 'selector': 'app-tab2'},{'name': 'Tab5Page', 'selector': 'app-tab2'},{'name': 'TabsPage', 'selector': 'app-tabs'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'RegisterPagePage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'RegisterPagePage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

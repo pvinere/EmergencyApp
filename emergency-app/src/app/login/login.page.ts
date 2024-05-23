@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AuthenticationService } from '../shared/authentication-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, isPlatform } from '@ionic/angular';
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { GoogleAuth, User } from '@codetrix-studio/capacitor-google-auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable, map } from 'rxjs';
@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
 
   ) {
 
-    if(!isPlatform('capacitor')) {
+    if(!isPlatform('android')) {
       GoogleAuth.initialize();
     }
 
@@ -51,8 +51,40 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit(): void {
-   
+    GoogleAuth.initialize();
 
+  }
+
+
+  checkLoggedIn() {
+    GoogleAuth.refresh().then((data) => {
+      if (data.accessToken) {
+        let navigationExtras: NavigationExtras = {
+          state: {
+            user: { type: 'existing', accessToken: data.accessToken, idToken: data.idToken }
+          }
+        };
+        this.router.navigate(['/tab_home'], navigationExtras);
+      }
+    }).catch(e => {
+      if (e.type === 'userLoggedOut') {
+        this.doLogin();
+      }
+    });
+  }
+
+  async doLogin() {
+    const user = await GoogleAuth.signIn();
+    if (user) {
+      this.goToHome(user);
+    }
+  
+  
+  }
+
+  goToHome(user: User) {
+    let navigationExtras: NavigationExtras = { state: { user: user } };
+    this.router.navigate(['/tab_home'], navigationExtras);
   }
 
   async logIn(email: any, password: any) {

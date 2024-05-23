@@ -1,12 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Feature } from 'ol';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import { Point } from 'ol/geom';
 import TileLayer from 'ol/layer/Tile';
-import VectorLayer from 'ol/layer/Vector';
 import OSM from 'ol/source/OSM';
-import VectorSource from 'ol/source/Vector';
 import {fromLonLat, useGeographic} from 'ol/proj.js';
 
 @Component({
