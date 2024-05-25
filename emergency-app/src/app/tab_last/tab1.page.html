@@ -18,79 +18,15 @@
     </div>
   </ion-item>
 
-  <ion-card>
+  <ion-card *ngFor="let notification of notifications">
     <ion-card-header>
-      <ion-card-title>Bear in the city!</ion-card-title>
-      <ion-card-subtitle>Emergency level 2</ion-card-subtitle>
-      <ion-card-subtitle>14:21</ion-card-subtitle>
+      <ion-card-title>{{ notification.title }}</ion-card-title>
+      <ion-card-subtitle>Emergency level {{ notification.nivel }}</ion-card-subtitle>
+      <ion-card-subtitle>{{ notification.timeAndDate }}</ion-card-subtitle>
     </ion-card-header>
   
     <ion-card-content>
-      There is a bear near Radu Stanca Street!
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Fire in the city!</ion-card-title>
-      <ion-card-subtitle>Emergency level 3</ion-card-subtitle>
-      <ion-card-subtitle>16:23</ion-card-subtitle>
-    </ion-card-header>
-    
-  
-    <ion-card-content>
-      There is a fire at hotel Continental!
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Fire in the city!</ion-card-title>
-      <ion-card-subtitle>Emergency level 3</ion-card-subtitle>
-      <ion-card-subtitle>16:23</ion-card-subtitle>
-    </ion-card-header>
-    
-  
-    <ion-card-content>
-      There is a fire at hotel Continental!
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Fire in the city!</ion-card-title>
-      <ion-card-subtitle>Emergency level 3</ion-card-subtitle>
-      <ion-card-subtitle>16:23</ion-card-subtitle>
-    </ion-card-header>
-    
-  
-    <ion-card-content>
-      There is a fire at hotel Continental!
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Fire in the city!</ion-card-title>
-      <ion-card-subtitle>Emergency level 3</ion-card-subtitle>
-      <ion-card-subtitle>16:23</ion-card-subtitle>
-    </ion-card-header>
-    
-  
-    <ion-card-content>
-      There is a fire at hotel Continental!
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Storm Comming</ion-card-title>
-      <ion-card-subtitle>Emergency level 5</ion-card-subtitle>
-      <ion-card-subtitle>11:23</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content>
-      A storm will come!
+      {{ notification.description }}
     </ion-card-content>
   </ion-card>
   
