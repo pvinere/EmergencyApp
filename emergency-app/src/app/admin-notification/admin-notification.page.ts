@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/notification.service';
@@ -67,7 +66,7 @@ export class AdminNotificationPage implements OnInit {
           title: notificationDataMessage.title ?? '',
           body: "Nivel " + notificationDataMessage.nivel + " "+ notificationDataMessage.description,
           id: 1,
-          schedule: { at: new Date(Date.now() + 1000 * 5) }, // 5 seconds from now
+          schedule: { at: new Date(Date.now() + 1000 * 5) }, // 5 secunde
         }
       ]
     });
