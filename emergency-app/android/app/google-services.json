@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "759438804028",
+    "firebase_url": "https://emergency-app-c3671-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "emergency-app-c3671",
+    "storage_bucket": "emergency-app-c3671.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759438804028:android:63f3922a81d966c4a06f39",
+        "android_client_info": {
+          "package_name": "com.puiu.emergencyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759438804028-s50pahkupprd4vtfl08nbm18tb3rkel4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.puiu.emergencyapp",
+            "certificate_hash": "699f1a52809ed7d21b99c8dcb6620ef928e45d9e"
+          }
+        },
+        {
+          "client_id": "759438804028-194qkg31p70sc5pekahve1ubqc4jp6lu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP1ojJC8gjgJr8LSMaFBaZoLoSFEWXdMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759438804028-194qkg31p70sc5pekahve1ubqc4jp6lu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

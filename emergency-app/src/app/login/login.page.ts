@@ -3,13 +3,21 @@ import { NavigationExtras, Router } from '@angular/router';
 import { AuthenticationService } from '../shared/authentication-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, isPlatform } from '@ionic/angular';
-import { GoogleAuth, User } from '@codetrix-studio/capacitor-google-auth';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { SharedService } from '../shared/service';
-import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence, onAuthStateChanged } from "firebase/auth";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+  onAuthStateChanged,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithCredential
+} from 'firebase/auth';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +36,7 @@ export class LoginPage implements OnInit {
     private afs: AngularFirestore,
     public router: Router,
     private afAuth: AngularFireAuth,
-    @Inject(SharedService)private sharedService: SharedService
+    @Inject(SharedService) private sharedService: SharedService
   ) {
     this.formRegLogin = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -37,10 +45,10 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit(): void {
+    GoogleAuth.initialize();
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, redirect to home page
         this.sharedService.setUID(user.uid);
         this.router.navigate(['/tabs/home']);
       }
@@ -56,7 +64,7 @@ export class LoginPage implements OnInit {
       .then((userCredential) => {
         const user = userCredential.user;
         this.sharedService.setUID(user.uid);
-        console.log("User UID:", this.sharedService.uid);
+        console.log('User UID:', this.sharedService.uid);
         this.router.navigate(['/tabs/home']);
       })
       .catch((error) => {
@@ -78,44 +86,87 @@ export class LoginPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Eroare',
       message: message,
-      buttons: ['OK']
+      buttons: ['OK'],
     });
     await alert.present();
   }
 
-  signInGoogle() {
-    const provider = new GoogleAuthProvider();
+  async signInGoogle() {
     const auth = getAuth();
-    setPersistence(auth, browserLocalPersistence)
-      .then(() => {
-        return signInWithPopup(auth, provider);
-      })
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        if (credential !== null) {
-          const user = result.user;
-          console.log('user:', user);
-
-          const name = user.displayName;
-          console.log("Name Google: " + name);
-          const email = user.email;
-          const uid = user.uid;
-          console.log("UID from login: " + uid);
-
-          this.afs.collection('users').doc(uid).set({
-            name: name,
+  
+    if (isPlatform('capacitor')) {
+      try {
+        await GoogleAuth.initialize();  // Ensure that GoogleAuth is initialized
+        const user = await GoogleAuth.signIn();
+        if (!user.authentication.idToken) {
+          throw new Error('No idToken found');
+        }
+        const credential = GoogleAuthProvider.credential(user.authentication.idToken);
+        await setPersistence(auth, browserLocalPersistence);
+        const result = await signInWithCredential(auth, credential);
+  
+        if (result.user) {
+          const { displayName, email, uid } = result.user;
+          console.log('Name Google:', displayName);
+          console.log('Email:', email);
+          console.log('UID from login:', uid);
+  
+          await this.afs.collection('users').doc(uid).set({
+            name: displayName,
             email: email,
-            uid: uid
+            uid: uid,
           });
-
-          this.sharedService.uid = uid;
+  
+          this.sharedService.setUID(uid);
           this.router.navigate(['/tabs/home']);
         } else {
-          console.error("Credential is null");
+          console.error('Credential is null');
         }
-      })
-      .catch((error) => {
+      } catch (error: any) {  // Use 'any' type for the error
         console.error('Error signing in with Google:', error);
-      });
+        
+        if (error.message) {
+          console.error('Error message:', error.message);
+        }
+        if (error.stack) {
+          console.error('Error stack:', error.stack);
+        }
+      }
+    } else {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider)
+        .then(async (result) => {
+          const user = result.user;
+          const { displayName, email, uid } = user;
+          console.log('Name Google:', displayName);
+          console.log('Email:', email);
+          console.log('UID from login:', uid);
+  
+          await this.afs.collection('users').doc(uid).set({
+            name: displayName,
+            email: email,
+            uid: uid,
+          });
+  
+          this.sharedService.setUID(uid);
+          this.router.navigate(['/tabs/home']);
+        })
+        .catch((error: any) => {  // Use 'any' type for the error
+          console.error('Error signing in with Google:', error);
+          // Adăugare de detalii suplimentare
+          if (error.message) {
+            console.error('Error message:', error.message);
+          }
+          if (error.stack) {
+            console.error('Error stack:', error.stack);
+          }
+          if (error.code) {
+            console.error('Error code:', error.code);
+          }
+          if (error.customData) {
+            console.error('Custom data:', error.customData);
+          }
+        });
+    }
   }
 }
