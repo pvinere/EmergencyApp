@@ -64,7 +64,7 @@ export class AdminNotificationPage implements OnInit {
       notifications: [
         {
           title: notificationDataMessage.title ?? '',
-          body: "Nivel " + notificationDataMessage.nivel + " "+ notificationDataMessage.description,
+          body: "Level " + notificationDataMessage.nivel + " "+ notificationDataMessage.description,
           id: 1,
           schedule: { at: new Date(Date.now() + 1000 * 5) }, // 5 secunde
         }

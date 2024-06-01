@@ -38,27 +38,6 @@ formReg: FormGroup;
   
   }
 
-  // signUp2(email: any, password: any, name: any)
-  // {
-  //   const auth = getAuth();
-  //   createUserWithEmailAndPassword(auth, email, password)
-  //   .then((userCredential) => { 
-  //     const user = userCredential.user;
-  //     const uid = user.uid;
-  //     this.afs.collection('users').doc(uid).set({
-  //       name: name.value,
-  //       email: email.value,
-  //       uid: uid
-  //     });
-  //     this.sharedService.uid = uid;
-  //     this.router.navigate(['/tabs/home']); 
-  //   }).catch((error) => {
-  //     window.alert(error.message);
-  //     const errorCode = error.code;
-  //     const errorMessage = error.message;
-  //   });
-  // }
-
 
   signUp(email: any, password: any, name: any) {
     this.authService
@@ -74,7 +53,6 @@ formReg: FormGroup;
           this.sharedService.uid = uid;
           this.router.navigate(['/tabs/home']);
         } else {
-          // Handle the case where res.user is null
           console.error("User data not available");
         }
         

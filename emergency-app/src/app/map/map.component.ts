@@ -36,7 +36,7 @@ export class MapComponent implements OnInit {
         }),
       ],
       view: new View({
-        center: fromLonLat(this.centerCoordinates), // Convert to EPSG:3857
+        center: fromLonLat(this.centerCoordinates),
         zoom: 12,
       }),
     });

@@ -151,9 +151,9 @@ export class LoginPage implements OnInit {
           this.sharedService.setUID(uid);
           this.router.navigate(['/tabs/home']);
         })
-        .catch((error: any) => {  // Use 'any' type for the error
+        //ERROR HANDLING
+        .catch((error: any) => {  
           console.error('Error signing in with Google:', error);
-          // Adăugare de detalii suplimentare
           if (error.message) {
             console.error('Error message:', error.message);
           }

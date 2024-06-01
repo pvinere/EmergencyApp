@@ -1,6 +1,22 @@
-.center{
+ion-content {
+    --background: var(--ion-background-color, #fff);
+  }
+  
+  ion-item {
+    --background: transparent;
+  }
+  
+  .center {
     display: flex;
     justify-content: center;
     align-items: center;
-    
-}
+  }
+  
+  ion-datetime {
+    width: 100%;
+  }
+
+  .no-scroll {
+    overflow: hidden;
+    touch-action: none; /* Dezactivează gesturile de touch */
+  }

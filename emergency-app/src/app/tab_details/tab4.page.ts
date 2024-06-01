@@ -59,9 +59,6 @@ export class Tab4Page implements OnInit{
     }
   }
 
-  
-
-  
   changeName(newName: string) {
     const uid = this.sharedService.uid; // Replace 'your_user_id' with the actual user ID
     this.afs.collection('users').doc(uid).update({ name: newName }) // Update the 'name' field in the 'users' collection
@@ -72,8 +69,6 @@ export class Tab4Page implements OnInit{
         console.error('Error updating name:', error);
       });
   }
-
-  
 
   async confirmModal_name(){
     
@@ -89,8 +84,6 @@ export class Tab4Page implements OnInit{
 
   async confirmModal_pass(){
     await this.passModal.dismiss();
-    
-    
   }
 
   async dismissModal_pass() {
@@ -114,12 +107,10 @@ export class Tab4Page implements OnInit{
       await user.updatePassword(this.newPassword);
       this.newPassword = '';
       this.oldPassword = '';
-      // Show success message or navigate to another page
       console.log('Password changed successfully');
       this.presentAlertPass('Password changed successfully');
     } catch (error) {
       console.error('Error changing password:', error);
-      // Show error message to the user
       this.presentAlertPass('E-Mail/Old password invalid!');
     }
   }

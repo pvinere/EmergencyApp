@@ -25,9 +25,9 @@ export class SharedService {
 
   toggleDarkMode() {
     this.darkMode = !this.darkMode;
-    document.body.classList.toggle('dark', this.darkMode); // Apply dark mode to body
+    document.body.classList.toggle('dark', this.darkMode); 
 
-    // Save dark mode state to localStorage
+    
     localStorage.setItem('darkModeActivated', this.darkMode ? 'true' : 'false');
   }
 }
