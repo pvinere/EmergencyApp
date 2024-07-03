@@ -5,6 +5,7 @@ import { Point } from 'ol/geom';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import {fromLonLat, useGeographic} from 'ol/proj.js';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-map',
@@ -15,17 +16,18 @@ export class MapComponent implements OnInit {
   @ViewChild('map', { static: true }) mapElement!: ElementRef;
   map!: Map;
 
-  
-
-  
-  centerCoordinates = [24.1515184,45.792528];
+  centerCoordinates = [0,0];
   point = new Point(this.centerCoordinates);
-  constructor() {}
 
-  ngOnInit() {
-    this.initializeMap();
+  constructor() {
+    this.getCurrentPosition().then(coords => {
+      this.centerCoordinates = [coords.longitude, coords.latitude];
+      this.point = new Point(this.centerCoordinates);
+      this.initializeMap();
+    });
   }
-  
+
+  ngOnInit() {}
 
   initializeMap() {
     this.map = new Map({
@@ -40,6 +42,10 @@ export class MapComponent implements OnInit {
         zoom: 12,
       }),
     });
-}
+  }
 
+  async getCurrentPosition() {
+    const position = await Geolocation.getCurrentPosition();
+    return position.coords;
+  }
 }

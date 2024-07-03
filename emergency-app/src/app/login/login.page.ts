@@ -8,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable } from 'rxjs';
 import { SharedService } from '../shared/service';
+
 import {
   getAuth,
   signInWithEmailAndPassword,

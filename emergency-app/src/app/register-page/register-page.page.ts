@@ -24,7 +24,7 @@ formReg: FormGroup;
     this.formReg = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8)],),
+      password: new FormControl('', [Validators.required, Validators.minLength(8), this.passwordValidator]),
       confirmPassword: new FormControl('', [Validators.required]),
     },
     {
@@ -70,6 +70,18 @@ formReg: FormGroup;
   
     return this.formReg.get('password');
   
+  }
+
+  passwordValidator(control: AbstractControl) {
+    const password = control.value;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
+
+    if (!hasUpperCase || !hasSpecialChar) {
+      return { invalidPassword: true };
+    }
+
+    return null;
   }
 
  

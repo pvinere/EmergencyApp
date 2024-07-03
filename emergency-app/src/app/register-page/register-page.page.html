@@ -18,10 +18,13 @@
       The E-Mail is invalid!
    </div> 
 
-    <ion-input class="lpass" formControlName="password" label="Type a new password" label-placement="floating" fill="outline" placeholder="Type a new password" type="password" #password required autocomplete="disabled"></ion-input>
-    <div *ngIf="formReg.controls['password'].hasError('minlength') && formReg?.touched" class="error-text">
-      The password must be 8 characters long!
-   </div> 
+   <ion-input class="lpass" formControlName="password" label="Type a new password" label-placement="floating" fill="outline" placeholder="Type a new password" type="password" #password required autocomplete="disabled"></ion-input>
+   <div *ngIf="formReg.controls['password'].value && formReg.controls['password'].hasError('minlength')" class="error-text">
+   The password must be 8 characters long!
+   </div>
+   <div *ngIf="formReg.controls['password'].value && formReg.controls['password'].hasError('invalidPassword')" class="error-text">
+   Password must contain at least one uppercase letter and one special character.
+   </div>
     <ion-input class="lpass" formControlName="confirmPassword" label="Re-enter the new Password" label-placement="floating" fill="outline" placeholder="Re-enter the new Password" type="password" #password required autocomplete="disabled" ></ion-input>  
     <div *ngIf="formReg?.errors?.['mismatch'] && formReg?.touched" class="error-text">
         Password must match!

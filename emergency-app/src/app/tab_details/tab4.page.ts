@@ -50,18 +50,18 @@ export class Tab4Page implements OnInit{
   }
 
   async checkGoogleSignInUser() {
-    const user = await this.afAuth.authState.pipe(take(1)).toPromise(); // Get the current user
+    const user = await this.afAuth.authState.pipe(take(1)).toPromise(); 
     if (user) {
-      const providerId = user.providerData[0]?.providerId; // Get the provider ID of the first provider
+      const providerId = user.providerData[0]?.providerId; 
       if (providerId === 'google.com') {
-        this.isGoogleSignInUser = true; // User has signed in with Google
+        this.isGoogleSignInUser = true; 
       }
     }
   }
 
   changeName(newName: string) {
-    const uid = this.sharedService.uid; // Replace 'your_user_id' with the actual user ID
-    this.afs.collection('users').doc(uid).update({ name: newName }) // Update the 'name' field in the 'users' collection
+    const uid = this.sharedService.uid; 
+    this.afs.collection('users').doc(uid).update({ name: newName })
       .then(() => {
         console.log('Name updated successfully');
       })
